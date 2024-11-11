@@ -1,5 +1,5 @@
 // types/Post.ts
-export type Post = {
+export type PostProps = {
     id: number;
     title: string;
     price: number;
@@ -80,3 +80,5 @@ export type PermissionProps = {
     id: number;
     name: string;
 }
+
+export type SwalIconType = 'success' | 'error' | 'warning' | 'info' | 'question';
