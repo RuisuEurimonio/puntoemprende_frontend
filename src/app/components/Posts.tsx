@@ -2,15 +2,17 @@
 
 import React, { useEffect, useState } from 'react';
 import { PostProps } from '../data/types';
-import { getPost } from '../data/api';
+import { getAll } from '../data/api';
 import NotAvaiable from './NotAvailable';
+import Filters from './Filters';
+import Spinner from './Spinner';
 
 const Post = () => {
   const [posts, setPosts] = useState<PostProps[] | null>(null);
   const [loading, setLoading] = useState<boolean>(true);
 
   useEffect(() => {
-    getPost()
+    getAll('post')
       .then((fetchedPosts) => {
         setPosts(fetchedPosts);
         setLoading(false); // Datos cargados, deja de mostrar el spinner
@@ -21,13 +23,15 @@ const Post = () => {
   }, []);
 
   if (loading) {
-    return <Loading />;
+    return <Spinner />;
   }
 
   return (
     <>
+      <h1 className='text-center mt-5 text-2xl text-main font-bold'>Ultimas publicaciones.</h1>
+      {posts && <Filters />}
       {posts ? (
-        <div className="p-10 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-4">
+        <div className="p-10 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4">
           {posts.map((post: PostProps) => (
             <div key={post.id} className="border p-4 rounded-lg shadow-lg">
               <img
@@ -52,6 +56,7 @@ const Post = () => {
                     ? 'Disponible'
                     : 'No Disponible'}
                 </span>
+                <p className="text-xs mt-4 text-gray-500">Publicado por: {post.user.business}</p>
               </div>
             </div>
           ))}
@@ -62,11 +67,5 @@ const Post = () => {
     </>
   );
 };
-
-const Loading = () => (
-  <div className="flex justify-center items-center p-10 min-h-[90vh]">
-    <div className="animate-spin rounded-full border-t-2 border-blue-600 w-12 h-12"></div>
-  </div>
-);
 
 export default Post;

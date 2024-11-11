@@ -1,11 +1,11 @@
 import Swal from "sweetalert2";
-import { PostProps } from "./types";
+import { PostProps, TypeValueProps } from "./types";
 import { fireToast } from "../utils/alerts";
 
 const HOST = "http://localhost:8080/api/"
-export async function getPost(){
+export async function getAll(typeValue : TypeValueProps){
     try{
-        const res = await fetch(HOST+"post/all")
+        const res = await fetch(HOST+ typeValue +"/all")
         if(res.status === 200){
             const resJson = await res.json();
             return resJson;
