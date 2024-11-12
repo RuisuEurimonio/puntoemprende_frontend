@@ -11,7 +11,7 @@ const Post = () => {
   const [posts, setPosts] = useState<PostProps[] | null>(null);
   const [loading, setLoading] = useState<boolean>(true);
 
-  useEffect(() => {
+  function getAllMethod(){
     getAll('post')
       .then((fetchedPosts) => {
         setPosts(fetchedPosts);
@@ -20,9 +20,17 @@ const Post = () => {
       .catch(() => {
         setLoading(false); // Si ocurre un error, también deja de mostrar el spinner
       });
+  }
+
+  useEffect(() => {
+    getAllMethod();
   }, []);
 
   function setData(data : PostProps[]){
+    if(data.length <= 0){
+      getAllMethod();
+      return;
+    }
     setPosts(data);
   }
 

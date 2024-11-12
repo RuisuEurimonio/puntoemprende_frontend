@@ -42,6 +42,7 @@ const Filters : React.FC<FiltersProps> = ( {updateData} ) => {
   const handleClick = () => {
     const input = searchText;
     if(input.length <= 0){
+      updateData([]);
       return;
     }
     searchEntity("post", input).then((data)=>{
