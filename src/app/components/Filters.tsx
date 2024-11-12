@@ -1,36 +1,61 @@
 "use client"
 
 import React, { useEffect, useState } from 'react';
-import { CategoryProps, TownProps } from '../data/types';
-import { getAll } from '../data/api';
+import { CategoryProps, PostProps, ScopeProps, TownProps } from '../data/types';
+import { findByEntity, getAll, searchEntity } from '../data/api';
 
-const Filters = () => {
-  const [selectedCity, setSelectedCity] = useState<string>('');
+type FiltersProps = {
+  updateData: (data : PostProps[]) => void;
+}
+
+
+
+const Filters : React.FC<FiltersProps> = ( {updateData} ) => {
+  const [selectedScope, setSelectedScope] = useState<string>('');
   const [selectedCategory, setSelectedCategory] = useState<string>('');
   const [searchText, setSearchText] = useState<string>('');
 
-  const [cities, setCities] = useState<TownProps[] | null>(null);
+  const [scope, setScope] = useState<ScopeProps[] | null>(null);
   const [categories, setCategories] = useState<CategoryProps[] | null>(null);
   const [isLoading, setIsLoading] = useState<Boolean>(true);
 
-  const handleCityChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
-    setSelectedCity(event.target.value);
+  const handleScopeChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
+    const id = event.target.value;
+    setSelectedScope(id);
+    findByEntity("post", "scope", parseInt(id)).then((data)=>{
+      updateData(data);
+    })
   };
 
   const handleCategoryChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
+    const id = event.target.value;
     setSelectedCategory(event.target.value);
+    findByEntity("post", "category", parseInt(id)).then((data)=>{
+      updateData(data);
+    })
   };
 
   const handleSearchTextChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setSearchText(event.target.value);
   };
 
+  const handleClick = () => {
+    const input = searchText;
+    if(input.length <= 0){
+      return;
+    }
+    searchEntity("post", input).then((data)=>{
+      updateData(data);
+      setSearchText("");
+    })
+  }
+
   useEffect(()=>{
     getAll('category').then((categories) => {
         setCategories(categories);
     })
-    getAll('town').then((towns)=>{
-        setCities(towns);
+    getAll('scope').then((scope)=>{
+        setScope(scope);
     })
     setIsLoading(false);
   },[])
@@ -54,17 +79,17 @@ const Filters = () => {
           {/* Filtro por ciudad */}
           <div className="flex flex-col">
             <select
-              id="city"
-              value={selectedCity}
-              onChange={handleCityChange}
+              id="scope"
+              value={selectedScope}
+              onChange={handleScopeChange}
               className="border px-4 text-lg text-background h-7 w-96
                         lg:w-56
               "
             >
-              <option value="">Seleccionar ciudad</option>
-              {!isLoading && cities && cities.map((city) => (
-                <option key={city.id} value={city.id}>
-                  {city.name} - {city.country.name}
+              <option value="">Seleccionar alcance</option>
+              {!isLoading && scope && scope.map((scope) => (
+                <option key={scope.id} value={scope.id}>
+                  {scope.name}
                 </option>
               ))}
             </select>
@@ -106,7 +131,7 @@ const Filters = () => {
             className="bg-main text-foreground px-4 text-lg hover:bg-secondary transition h-7 w-96
                         lg:w-auto
             "
-            onClick={()=>{}}
+            onClick={handleClick}
           >
             Buscar
           </button>

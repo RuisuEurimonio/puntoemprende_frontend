@@ -15,3 +15,29 @@ export async function getAll(typeValue : TypeValueProps){
         fireToast("error", "Ha sucedido un error, vuelvelo a intentar.\n");
     }
 }
+
+export async function findByEntity(typeValue: TypeValueProps, findBy : TypeValueProps , id : number){
+    try{
+        const res = await fetch(HOST+ typeValue+ "/find/" +findBy+"/"+id);
+        if(res.status === 200){
+            const resJson = await res.json();
+            return resJson;
+        }
+        return null;
+    } catch(e){
+        fireToast("error", "Ha sucedido un error, vuelvelo a intentar.\n");
+    }
+}
+
+export async function searchEntity(typeValue: TypeValueProps, input : string){
+    try{
+        const res = await fetch(HOST+ typeValue+ "/search/" +input);
+        if(res.status === 200){
+            const resJson = await res.json();
+            return resJson;
+        }
+        return null;
+    } catch(e){
+        fireToast("error", "Ha sucedido un error, vuelvelo a intentar.\n");
+    }
+}

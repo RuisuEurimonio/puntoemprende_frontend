@@ -22,6 +22,10 @@ const Post = () => {
       });
   }, []);
 
+  function setData(data : PostProps[]){
+    setPosts(data);
+  }
+
   if (loading) {
     return <Spinner />;
   }
@@ -29,7 +33,7 @@ const Post = () => {
   return (
     <>
       <h1 className='text-center mt-5 text-2xl text-main font-bold'>Ultimas publicaciones.</h1>
-      {posts && <Filters />}
+      {posts && <Filters updateData={setData} />}
       {posts ? (
         <div className="p-10 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4">
           {posts.map((post: PostProps) => (
