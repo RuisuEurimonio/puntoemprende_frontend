@@ -41,3 +41,27 @@ export async function searchEntity(typeValue: TypeValueProps, input : string){
         fireToast("error", "Ha sucedido un error, vuelvelo a intentar.\n");
     }
 }
+
+export async function login(email : String, password : String){
+    try{
+        const res = await fetch(HOST+ "user/login", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            }, 
+            body: JSON.stringify({
+                "email": email,
+                "password": password
+            })
+        });
+        if(res.status === 202){
+            const resJson = await res.json();
+            return resJson;
+        }else if(res.status === 403){
+            fireToast("error", "Credenciales invalidas.")
+        }
+        return null;
+    } catch(e){
+        fireToast("error", "Ha sucedido un error, vuelvelo a intentar.\n");
+    }
+}
