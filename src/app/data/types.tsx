@@ -25,55 +25,55 @@ export type ReportedStatusProps = {
 }
 
 export type MotiveProps = {
-    name: string;
-    description: string;
+    name?: string;
+    description?: string;
     id: number;
 }
 
 export type CategoryProps = {
-    name: string;
-    description: string;
+    name?: string;
+    description?: string;
     id: number;
 }
 
 export type ScopeProps = {
-    name: string;
-    description: string;
+    name?: string;
+    description?: string;
     id: number;
 }
 
 export type UserProps = {
-    id: number;
+    id?: number;
     name: string;
     lastName: string;
     email: string;
-    business: string;
+    business?: string;
     address: string;
     document: string;
     password: string;
     town: TownProps
     typeDocument: TypeDocumentProps
-    permission: PermissionProps
-    autenticated: boolean;
+    permission?: PermissionProps
+    isAutenticated?: boolean;
 }
 
 export type TownProps = {
     id: number;
-    name: string;
-    country: CountryProps
+    name?: string;
+    country?: CountryProps
 }
 
 export type CountryProps = {
     id: number;
-    name: string;
-    prefix: string;
+    name?: string;
+    prefix?: string;
 }
 
 export type TypeDocumentProps = {
     id: number;
-    name: string;
-    prefix: string;
-    description: string;
+    name?: string;
+    prefix?: string;
+    description?: string;
 }
 
 export type PermissionProps = {
@@ -83,4 +83,4 @@ export type PermissionProps = {
 
 export type SwalIconType = 'success' | 'error' | 'warning' | 'info' | 'question';
 
-export type TypeValueProps = 'post' | 'category' | 'town' | 'scope'
+export type TypeValueProps = 'post' | 'category' | 'town' | 'scope' | 'typedocument';

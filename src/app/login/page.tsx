@@ -6,6 +6,7 @@ import { z } from 'zod';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { login } from '../data/api';
 import { useRouter } from 'next/navigation';
+import Link from 'next/link';
 
 
 const loginSchema = z.object({
@@ -80,6 +81,7 @@ const LoginForm: React.FC = () => {
           Iniciar Sesión
         </button>
       </form>
+      <p className='text-right mt-2'> ¿No tienes una cuenta?, <Link href="/register" className="underline text-main"> registrate aqui. </Link> </p>
     </div>
   );
 };
