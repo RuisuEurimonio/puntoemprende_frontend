@@ -123,11 +123,11 @@ const MyAccountPage: React.FC = () => {
               <h2 className="text-lg font-semibold text-gray-800">Redes Sociales</h2>
               <div className="mt-4 space-y-2">
                 {user && user.socialMedia?.map((social) => (
-                  <div key={social.id} className="flex items-center flex-col justify-between bg-gray-100 p-2 rounded-md text-black
+                  <div key={social.id} className="flex items-center flex-col justify-between bg-gray-100 p-2 rounded-md text-black 
                                                   md:flex-row
                   ">
                     <h3 className="font-bold">{social.name}</h3>
-                    <p>{social.description}</p>
+                    <p className="max-w-[80%]">{social.description}</p>
                     <Link href={social.link} target="_blank" rel="noopener noreferrer">
                       {social.link}
                     </Link>

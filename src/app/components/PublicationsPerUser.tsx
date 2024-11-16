@@ -3,20 +3,27 @@
 import React, { useState, useEffect } from 'react';
 import { PostProps } from '../data/types';
 import { findByEntity } from '../data/api';
+import PostModal from './PostModal';
 
 type userPostsProps = {
     idUser : number
 }
 const PublicationPerUser : React.FC<userPostsProps> = ({idUser}) => {
     const [posts, setPosts] = useState<PostProps[]>([]);
-    const [selectedPost, setSelectedPost] = useState<PostProps | null>(null);
+    const [selectedPost, setSelectedPost] = useState<PostProps | undefined>(undefined);
     const [modalOpen, setModalOpen] = useState(false);
+    const [updateData, setUpdateData] = useState(true);
 
     useEffect(() => {
         findByEntity("post", "user", idUser).then((data)=>{
             setPosts(data);
         })
-    }, []);
+        setUpdateData(false);
+    }, [updateData]);
+
+    const handleUpdateData = () =>{
+        setUpdateData(true);
+    }
 
     const handleDelete = (id: number) => {
         
@@ -25,6 +32,10 @@ const PublicationPerUser : React.FC<userPostsProps> = ({idUser}) => {
     const handleUpdate = (updatedPost: PostProps) => {
         
     };
+
+    const handleOpenCloseModal = () => {
+        setModalOpen(!modalOpen);
+    }
 
     return (
         <div className="mt-5 px-4">
@@ -72,7 +83,17 @@ const PublicationPerUser : React.FC<userPostsProps> = ({idUser}) => {
                 ))}
             </tbody>
         </table>
+        <button
+            onClick={() => {
+            setSelectedPost(undefined);
+            setModalOpen(true);
+            }}
+            className="bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-600 mt-5"
+            >
+                Crear publicación.
+            </button>
     </div>
+    <PostModal key={"post-"+selectedPost?.id} isOpen={modalOpen} post={selectedPost} onUpdate={handleUpdateData} onClose={handleOpenCloseModal}/>
 </div>
 
     );

@@ -99,7 +99,7 @@ export async function createApi<T>(type : TypeValueProps, data : T){
                 "Content-Type": "application/json"
             }
         });
-        if(res.status === 200){
+        if(res.status === 201){
             const resJson = await res.json();
             return resJson;
         }
