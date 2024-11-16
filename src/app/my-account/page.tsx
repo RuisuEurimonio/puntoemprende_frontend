@@ -6,6 +6,7 @@ import { getById } from "../data/api";
 import UserEditModal from "../components/userEditModal";
 import Link from "next/link";
 import { getUserFromLocal } from "../utils/localStorage";
+import PublicationPerUser from "../components/PublicationsPerUser";
 
 const MyAccountPage: React.FC = () => {
   const [user, setUser] = useState<UserProps | null>(null);
@@ -119,6 +120,7 @@ const MyAccountPage: React.FC = () => {
                 Eliminar Cuenta
               </button>
             </div>
+            {user && user.id && <PublicationPerUser idUser={user.id} />}
           </>
         ) : (
           <p>Cargando información del usuario...</p>

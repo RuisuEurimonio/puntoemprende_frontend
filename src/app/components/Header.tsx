@@ -45,11 +45,11 @@ const Header: React.FC<HeaderProps> = ({ logoSrc, pageTitle }) => {
         <Link href="/" className="hover:text-gray-300">
           Inicio
         </Link>
+        <Link href="/business" className="hover:text-gray-300">
+          Emprendimientos
+        </Link>
         <Link href="/about" className="hover:text-gray-300">
           Acerca de
-        </Link>
-        <Link href="/services" className="hover:text-gray-300">
-          Servicios
         </Link>
       </nav>
 
