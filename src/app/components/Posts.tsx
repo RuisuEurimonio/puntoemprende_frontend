@@ -6,10 +6,14 @@ import { getAll } from '../data/api';
 import NotAvaiable from './NotAvailable';
 import Filters from './Filters';
 import Spinner from './Spinner';
+import PostModal from './PostModal';
+import ViewPost from './viewPost';
 
 const Post = () => {
   const [posts, setPosts] = useState<PostProps[] | null>(null);
   const [loading, setLoading] = useState<boolean>(true);
+  const [postId, setPostId] = useState<number>();
+  const [isModalOpen, setModalOpen] = useState(false);
 
   function getAllMethod(){
     getAll('post')
@@ -45,7 +49,7 @@ const Post = () => {
       {posts ? (
         <div className="p-10 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4">
           {posts.map((post: PostProps) => (
-            <div key={post.id} className="border p-4 rounded-lg shadow-lg">
+            <div key={post.id} className="border p-4 rounded-lg shadow-lg cursor-pointer" onClick={() => {setModalOpen(true); setPostId(post.id)}}>
               <img
                 src={post.image}
                 alt={post.title}
@@ -76,6 +80,13 @@ const Post = () => {
       ) : (
         <NotAvaiable title="Error" description="No se pudo consultar los post, vuelve a intentarlo." />
       )}
+      {postId && <ViewPost
+        key={postId+"post"}
+        isOpen={isModalOpen}
+        onClose={() => setModalOpen(false)}
+        idPost={postId}
+      />
+      }
     </>
   );
 };

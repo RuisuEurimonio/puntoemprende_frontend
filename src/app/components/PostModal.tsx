@@ -10,6 +10,7 @@ import { createApi, getAll } from "../data/api";
 type PostModalProps = {
   isOpen: boolean;
   onClose: () => void;
+  
 };
 
 // Esquema de validación con Zod

@@ -55,6 +55,14 @@ export type UserProps = {
     typeDocument: TypeDocumentProps
     permission?: PermissionProps
     isAutenticated?: boolean;
+    socialMedia?: SocialMediaProps[]
+}
+
+export type SocialMediaProps = {
+    id?: number,
+    name: string,
+    description: string,
+    link: string
 }
 
 export type TownProps = {

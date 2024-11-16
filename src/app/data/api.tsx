@@ -108,3 +108,16 @@ export async function createApi<T>(type : TypeValueProps, data : T){
         fireToast("error", e+"");
     }
 }
+
+export async function getById(type : TypeValueProps, id : number){
+    try{
+        const res = await fetch(HOST+ type+ "/id/"+id);
+        if(res.status === 200){
+            const resJson = await res.json();
+            return resJson;
+        }
+        return null;
+    } catch(e){
+        fireToast("error", "Ha sucedido un error, vuelvelo a intentar.\n");
+    }
+}
