@@ -1,17 +1,25 @@
 "use client";
 
 import React, { useEffect, useState } from "react";
-import { UserProps } from "../data/types";
+import { SocialMediaProps, UserProps } from "../data/types";
 import { getById } from "../data/api";
 import UserEditModal from "../components/userEditModal";
 import Link from "next/link";
 import { getUserFromLocal } from "../utils/localStorage";
 import PublicationPerUser from "../components/PublicationsPerUser";
+import { fireToast, handleAccountDeletion, handleEntitytDeletion } from "../utils/alerts";
+import SocialMediaModal from "../components/SocialMediaModal";
+import { useRouter } from "next/navigation";
 
 const MyAccountPage: React.FC = () => {
   const [user, setUser] = useState<UserProps | null>(null);
   const [modalVisible, setModalVisible] = useState<boolean>(false);
   const [isLoading, setIsLoading] = useState<boolean>(true);
+  const [socials, setSocials] = useState<SocialMediaProps>();
+  const [socialModalOpen, setSocialModalOpen] = useState(false); 
+  const [updateData, setUpdateData] = useState(true);
+
+  const router = useRouter();
 
   useEffect(() => {
     const userJson : UserProps = getUserFromLocal();
@@ -21,18 +29,42 @@ const MyAccountPage: React.FC = () => {
         setIsLoading(false);
       })
     }
-  }, []);
+    console.log("me voy a poner en false")
+    setUpdateData(false);
+  }, [updateData]);
+
+  const handleUpdateData = () => {
+    console.log("me voy a poner en true")
+    setUpdateData(true);
+  }
 
   const handleModalVisible = () => {
     setModalVisible(!modalVisible);
   };
 
+  const openSocialModal = (social?: SocialMediaProps) => {
+    setSocials(social); 
+    setSocialModalOpen(true); 
+  };
+
+  // Función para cerrar el modal
+  const closeSocialModal = () => {
+    setSocialModalOpen(false);
+    setSocials(undefined); 
+  };
+
   const handleDeleteAccount = () => {
-    const confirmDelete = confirm("¿Estás seguro de que deseas eliminar tu cuenta?");
-    if (confirmDelete) {
-      console.log("Cuenta eliminada");
+    if(user && user.id){
+      handleAccountDeletion("user", user.id);
+      router.push("/");
+    }else{
+      fireToast("error", "Ha sucedido un error, vuelve a iniciar sesión.")
     }
   };
+
+  const handleDeleteSocialMedia = (idSocial : number) => {
+    handleEntitytDeletion("social-media", idSocial, handleUpdateData ,"Red social", "Eliminar red social asociada.");
+  }
 
   return (
     <div className="max-w-4xl mx-auto py-8 px-4">
@@ -99,10 +131,17 @@ const MyAccountPage: React.FC = () => {
                     <Link href={social.link} target="_blank" rel="noopener noreferrer">
                       {social.link}
                     </Link>
-                    <button className="text-red-500 hover:underline">Eliminar</button>
+                    <div>
+                      <button className="text-blue-600 hover:underline" onClick={()=>{
+                        if(social) {openSocialModal(social)}}}>Actualizar.</button>
+                      <button className="text-red-500 hover:underline" onClick={()=>{
+                        if(social.id) {handleDeleteSocialMedia(social.id)}}}>Eliminar</button>
+                    </div>
                   </div>
                 ))}
-                <button className="bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-600">Agregar Red Social</button>
+                <button className="bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-600" onClick={()=>{
+                  openSocialModal(undefined);
+                }}>Agregar Red Social</button>
               </div>
             </div>
 
@@ -127,8 +166,16 @@ const MyAccountPage: React.FC = () => {
         )}
       </div>
 
+      {socialModalOpen && user && user.id && <SocialMediaModal
+        key={""+updateData+"-socialModal"}
+        socialToEdit={socials}
+        onClose={() => closeSocialModal()}
+        onUpdate={handleUpdateData}
+        idUser={user?.id}
+      />}
+
       {/* Modal */}
-      <UserEditModal isModalOpen={modalVisible} closeModal={handleModalVisible} />
+      <UserEditModal key={""+updateData+"-userModal"} isModalOpen={modalVisible} closeModal={handleModalVisible} />
     </div>
   );
 };

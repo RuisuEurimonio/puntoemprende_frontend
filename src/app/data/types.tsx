@@ -91,4 +91,4 @@ export type PermissionProps = {
 
 export type SwalIconType = 'success' | 'error' | 'warning' | 'info' | 'question';
 
-export type TypeValueProps = 'post' | 'category' | 'town' | 'scope' | 'typedocument' | 'user';
+export type TypeValueProps = 'post' | 'category' | 'town' | 'scope' | 'typedocument' | 'user' | 'social-media';

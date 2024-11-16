@@ -140,3 +140,20 @@ export async function updateApi<T>(type : TypeValueProps, data : T){
         fireToast("error", e+"");
     }
 }
+
+export async function deleteApi(type : TypeValueProps, idEntity : number){
+    try{
+        const res = await fetch(HOST+ type+"/delete/"+idEntity,{
+            method: "DELETE",
+            headers: {
+                "Content-Type": "application/json"
+            }
+        });
+        if(res.status === 204){
+            return true;
+        }
+        throw new Error(await res.text());
+    } catch(e ){
+        fireToast("error", e+"");
+    }
+}
