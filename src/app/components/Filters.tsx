@@ -1,8 +1,10 @@
 "use client"
 
 import React, { useEffect, useState } from 'react';
-import { CategoryProps, PostProps, ScopeProps, TownProps } from '../data/types';
+import { CategoryProps, PostProps, ScopeProps, TownProps, UserProps } from '../data/types';
 import { findByEntity, getAll, searchEntity } from '../data/api';
+import { fireToast } from '../utils/alerts';
+import PostModal from './PostModal';
 
 type FiltersProps = {
   updateData: (data : PostProps[]) => void;
@@ -18,6 +20,7 @@ const Filters : React.FC<FiltersProps> = ( {updateData} ) => {
   const [scope, setScope] = useState<ScopeProps[] | null>(null);
   const [categories, setCategories] = useState<CategoryProps[] | null>(null);
   const [isLoading, setIsLoading] = useState<Boolean>(true);
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
   const handleScopeChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
     const id = event.target.value;
@@ -51,6 +54,17 @@ const Filters : React.FC<FiltersProps> = ( {updateData} ) => {
     })
   }
 
+  function validateCreation(){
+    const userValidation = localStorage.getItem("U"); 
+    const data : UserProps = (userValidation) ? JSON.parse(userValidation) : null;
+    if(data != null && data.business && data.business.length > 2){
+      setIsModalOpen(true);
+    }else{
+      fireToast("error", "Necesitas tener una cuenta y un emprendimiento registrado.")
+    }
+    
+  }
+
   useEffect(()=>{
     getAll('category').then((categories) => {
         setCategories(categories);
@@ -68,8 +82,9 @@ const Filters : React.FC<FiltersProps> = ( {updateData} ) => {
       ">
         {/* Botón para agregar publicación */}
         <button className="bg-main text-white px-4 text-lg hover:bg-secondary transition h-7 w-96 mb-5
-                            lg:w-auto lg:mb-0
-        ">
+                            lg:w-auto lg:mb-0"
+                onClick={validateCreation}
+        >
           Agregar Publicación
         </button>
 
@@ -138,6 +153,10 @@ const Filters : React.FC<FiltersProps> = ( {updateData} ) => {
           </button>
         </div>
       </div>
+      <PostModal
+        isOpen={isModalOpen}
+        onClose={() => setIsModalOpen(false)}
+      />
     </div>
   );
 };

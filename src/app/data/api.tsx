@@ -89,3 +89,22 @@ export async function registerUser<T extends UserProps>(data : T){
         
     }
 }
+
+export async function createApi<T>(type : TypeValueProps, data : T){
+    try{
+        const res = await fetch(HOST+ type+"/create",{
+            method: "POST",
+            body: JSON.stringify(data),
+            headers: {
+                "Content-Type": "application/json"
+            }
+        });
+        if(res.status === 200){
+            const resJson = await res.json();
+            return resJson;
+        }
+        throw new Error(await res.text());
+    } catch(e ){
+        fireToast("error", e+"");
+    }
+}

@@ -37,7 +37,7 @@ const LoginForm: React.FC = () => {
   const onSubmit = (data: LoginFormData) => {
      login(data.email, data.password).then((data)=>{
       localStorage.setItem("T", data.Token);
-      localStorage.setItem("U", data.User);
+      localStorage.setItem("U", JSON.stringify(data.User));
       router.push("/")
      })
   };
