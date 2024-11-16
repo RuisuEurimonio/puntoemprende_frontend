@@ -4,6 +4,7 @@ import Link from "next/link";
 import Image from "next/image";
 import React, { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
+import { UserProps } from "../data/types";
 
 type HeaderProps = {
   logoSrc: string;
@@ -14,12 +15,15 @@ const Header: React.FC<HeaderProps> = ({ logoSrc, pageTitle }) => {
   // Estado para verificar si el usuario está logueado
   const [isLoggedIn, setIsLoggedIn] = useState<boolean>(false);
   const router = useRouter();
+  const [email, setEmail] = useState<string>();
 
   // Verificamos el estado de autenticación al cargar el componente
   useEffect(() => {
     const user = localStorage.getItem("U"); // O donde tengas guardada la info del usuario
-    if (user) {
-      setIsLoggedIn(true); // Si hay información del usuario, se considera logueado
+    const userJson = user ? JSON.parse(user) : null;
+    if (user ) {
+      setIsLoggedIn(true);
+      setEmail(userJson.email);
     }
   }, []);
 
@@ -50,7 +54,7 @@ const Header: React.FC<HeaderProps> = ({ logoSrc, pageTitle }) => {
       </nav>
 
       <div>
-        {/* Aquí mostramos el botón dinámicamente */}
+        <Link href="/my-account" className="pr-5"> {email} </Link>
         {isLoggedIn ? (
           <button
             onClick={handleLogout}

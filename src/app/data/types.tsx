@@ -47,15 +47,15 @@ export type UserProps = {
     name: string;
     lastName: string;
     email: string;
-    business?: string;
+    business?: string | null;
     address: string;
     document: string;
     password: string;
     town: TownProps
     typeDocument: TypeDocumentProps
-    permission?: PermissionProps
+    permission?: PermissionProps |null
     isAutenticated?: boolean;
-    socialMedia?: SocialMediaProps[]
+    socialMedia?: SocialMediaProps[] | null
 }
 
 export type SocialMediaProps = {
@@ -91,4 +91,4 @@ export type PermissionProps = {
 
 export type SwalIconType = 'success' | 'error' | 'warning' | 'info' | 'question';
 
-export type TypeValueProps = 'post' | 'category' | 'town' | 'scope' | 'typedocument';
+export type TypeValueProps = 'post' | 'category' | 'town' | 'scope' | 'typedocument' | 'user';
