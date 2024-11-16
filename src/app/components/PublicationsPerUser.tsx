@@ -4,6 +4,7 @@ import React, { useState, useEffect } from 'react';
 import { PostProps } from '../data/types';
 import { findByEntity } from '../data/api';
 import PostModal from './PostModal';
+import { handleEntitytDeletion } from '../utils/alerts';
 
 type userPostsProps = {
     idUser : number
@@ -26,11 +27,7 @@ const PublicationPerUser : React.FC<userPostsProps> = ({idUser}) => {
     }
 
     const handleDelete = (id: number) => {
-        
-    };
-
-    const handleUpdate = (updatedPost: PostProps) => {
-        
+        handleEntitytDeletion("post", id, handleUpdateData, "publicación", "Eliminar publicación seleccionada.")
     };
 
     const handleOpenCloseModal = () => {
