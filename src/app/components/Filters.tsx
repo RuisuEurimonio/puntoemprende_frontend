@@ -8,11 +8,12 @@ import PostModal from './PostModal';
 
 type FiltersProps = {
   updateData: (data : PostProps[]) => void;
+  onUpdate: () => void;
 }
 
 
 
-const Filters : React.FC<FiltersProps> = ( {updateData} ) => {
+const Filters : React.FC<FiltersProps> = ( {updateData, onUpdate} ) => {
   const [selectedScope, setSelectedScope] = useState<string>('');
   const [selectedCategory, setSelectedCategory] = useState<string>('');
   const [searchText, setSearchText] = useState<string>('');
@@ -156,6 +157,7 @@ const Filters : React.FC<FiltersProps> = ( {updateData} ) => {
       <PostModal
         isOpen={isModalOpen}
         onClose={() => setIsModalOpen(false)}
+        onUpdate={onUpdate}
       />
     </div>
   );

@@ -4,7 +4,6 @@ import Link from "next/link";
 import Image from "next/image";
 import React, { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
-import { UserProps } from "../data/types";
 
 type HeaderProps = {
   logoSrc: string;

@@ -25,7 +25,7 @@ const ViewPost: React.FC<ModalProps> = ({ isOpen, onClose, idPost }) => {
         <>
             {isOpen && (
                 <div className="fixed inset-0 bg-gray-800 bg-opacity-50 flex justify-center items-center z-50">
-                    <div className="bg-black p-6 rounded-lg w-11/12">
+                    <div className="bg-black p-6 rounded-lg w-11/12 max-w-7xl border-2 border-white">
                         <button
                             onClick={onClose}
                             className="absolute top-2 right-2 bg-gray-400 text-white rounded-full p-2"
@@ -40,7 +40,7 @@ const ViewPost: React.FC<ModalProps> = ({ isOpen, onClose, idPost }) => {
                         <img
                             src={data?.image ?? "error"}
                             alt={data?.title ?? "error"}
-                            className="w-full h-56 object-cover mb-4"
+                            className="w-full object-cover mb-4 max-w-xl m-auto"
                         />
 
                         <p className="mb-2">

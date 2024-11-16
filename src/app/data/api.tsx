@@ -157,3 +157,16 @@ export async function deleteApi(type : TypeValueProps, idEntity : number){
         fireToast("error", e+"");
     }
 }
+
+export async function getBusiness(){
+    try{
+        const res = await fetch(HOST+ "user/business");
+        if(res.status === 200){
+            const resJson = await res.json();
+            return resJson;
+        }
+        return null;
+    } catch(e){
+        fireToast("error", "Ha sucedido un error, vuelvelo a intentar.\n");
+    }
+}

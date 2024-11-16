@@ -14,6 +14,7 @@ const Post = () => {
   const [loading, setLoading] = useState<boolean>(true);
   const [postId, setPostId] = useState<number>();
   const [isModalOpen, setModalOpen] = useState(false);
+  const [resetData, setResetData] = useState(true);
 
   function getAllMethod(){
     getAll('post')
@@ -26,9 +27,14 @@ const Post = () => {
       });
   }
 
+  const handleResetData = () => {
+    setResetData(true);
+  }
+
   useEffect(() => {
     getAllMethod();
-  }, []);
+    setResetData(false);
+  }, [resetData]);
 
   function setData(data : PostProps[]){
     if(data.length <= 0){
@@ -45,7 +51,7 @@ const Post = () => {
   return (
     <>
       <h1 className='text-center mt-5 text-2xl text-main font-bold'>Ultimas publicaciones.</h1>
-      {posts && <Filters updateData={setData} />}
+      {posts && <Filters updateData={setData} onUpdate={handleResetData}/>}
       {posts ? (
         <div className="p-10 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4">
           {posts.map((post: PostProps) => (
