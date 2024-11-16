@@ -33,10 +33,10 @@ const Header: React.FC<HeaderProps> = ({ logoSrc, pageTitle }) => {
 
   return (
     <header className="flex justify-between flex-col gap-4 items-center p-4 bg-gray-800 text-white w-full sm:flex-row">
-      <div className="flex items-center space-x-2">
+      <Link href={"/"} className="flex items-center space-x-2">
         <Image src={logoSrc} alt="Logo" width={32} height={32} />
         <span className="text-xl font-semibold">{pageTitle}</span>
-      </div>
+      </Link>
       <nav className="hidden sm:flex space-x-6">
         <Link href="/" className="hover:text-gray-300">
           Inicio
