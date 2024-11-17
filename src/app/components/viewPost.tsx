@@ -40,7 +40,7 @@ const ViewPost: React.FC<ModalProps> = ({ isOpen, onClose, idPost }) => {
                         <img
                             src={data?.image ?? "error"}
                             alt={data?.title ?? "error"}
-                            className="w-full object-cover mb-4 max-w-xl m-auto"
+                            className="w-full object-cover mb-4 max-w-[15rem] m-auto"
                         />
 
                         <p className="mb-2">

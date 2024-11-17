@@ -53,14 +53,16 @@ const Header: React.FC<HeaderProps> = ({ logoSrc, pageTitle }) => {
       </nav>
 
       <div>
-        <Link href="/my-account" className="pr-5"> {email} </Link>
         {isLoggedIn ? (
+        <>
+          <Link href="/my-account" className="pr-5"> {email} </Link>
           <button
             onClick={handleLogout}
             className="bg-main px-4 py-2 rounded hover:bg-secondary"
           >
             Cerrar Sesión
           </button>
+        </>
         ) : (
           <Link href="/login" className="bg-main px-4 py-2 rounded hover:bg-secondary">
             Iniciar Sesión

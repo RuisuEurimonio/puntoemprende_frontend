@@ -1,17 +1,19 @@
 "use client"
 
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import Category from '../components/Category';
 import Motive from '../components/Motive';
 import Scope from '../components/Scope';
 import TableUser from '../components/TableUsers';
+import { getUserFromLocal } from '../utils/localStorage';
+import { useRouter } from 'next/navigation';
 
 // Importa los componentes para cada sección
 
 const SettingsPage: React.FC = () => {
   // Estado para rastrear la sección activa
   const [activeSection, setActiveSection] = useState<string>('profile');
-
+    const router = useRouter();
   // Función para renderizar el componente correcto
   const renderSection = () => {
     switch (activeSection) {
@@ -27,6 +29,14 @@ const SettingsPage: React.FC = () => {
         return <p className="text-gray-600">Selecciona una opción del menú para comenzar.</p>;
     }
   };
+
+  useEffect(()=>{
+    const user = getUserFromLocal();
+    console.log(user)
+    if(user.permission?.id != 2){
+        router.push("/");
+    }
+  },[])
 
   return (
     <div className="min-h-screen">

@@ -3,6 +3,7 @@
 import React, { useEffect, useState } from 'react';
 import { UserProps } from '../data/types';
 import { getAll } from '../data/api';
+import UserFormModal from './UserFormModal';
 
 type TableUserProps = {
   
@@ -11,6 +12,12 @@ type TableUserProps = {
 const TableUser: React.FC<TableUserProps> = () => {
 
     const [users, setUser] = useState<UserProps[] | null>(null);
+    const [modalOpenClose, setModalOpenClose] = useState<boolean>(false);
+    const [userForUpdate, setUserForUpdate] = useState<UserProps | undefined>(undefined);
+
+  const handleModal = () => {
+    setModalOpenClose(!modalOpenClose);
+  }
 
   const handleEdit = () => {
 
@@ -54,7 +61,7 @@ const TableUser: React.FC<TableUserProps> = () => {
               <td className="py-2 px-4 border-b">{item.isAutenticated ? 'Yes' : 'No'}</td>
               <td className="py-2 px-6 border-b text-center">
               <button
-                onClick={() => handleEdit()}
+                onClick={() => {setModalOpenClose(true); setUserForUpdate(item)}}
                 className="text-blue-500 hover:text-blue-700"
               >
                 Editar
@@ -72,6 +79,14 @@ const TableUser: React.FC<TableUserProps> = () => {
           ))}
         </tbody>
       </table>
+      <button
+        onClick={() => {setModalOpenClose(true); setUserForUpdate(undefined)}}
+        className="px-4 py-2 mt-4 bg-blue-500 text-white rounded"
+      >
+        Abrir Modal
+      </button>
+
+      <UserFormModal isOpen={modalOpenClose} handleModal={handleModal} user={userForUpdate}/>
     </div>
   );
 };
