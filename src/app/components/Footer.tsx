@@ -15,7 +15,7 @@ const Footer: React.FC = () => {
         </div>
 
         <p className="text-sm text-gray-400 max-w-xl text-justify">
-        Punto Emprende es un espacio diseñado para ser el punto de encuentro virtual de todos los emprendimientos. Aquí, los emprendedores pueden dar visibilidad a sus productos y servicios, alcanzando un público más amplio y mejorando su posicionamiento en el mercado. Al mismo tiempo, los usuarios tienen acceso fácil y rápido a una amplia gama de emprendimientos, desde los más innovadores hasta los más consolidados, todo en un solo lugar. Nuestro lema es claro: "Calidad en un solo lugar", un espacio donde la variedad, la accesibilidad y la calidad convergen para ofrecer lo mejor de cada emprendimiento.
+        Punto Emprende es un espacio diseñado para ser el punto de encuentro virtual de todos los emprendimientos. Aquí, los emprendedores pueden dar visibilidad a sus productos y servicios, alcanzando un público más amplio y mejorando su posicionamiento en el mercado. Al mismo tiempo, los usuarios tienen acceso fácil y rápido a una amplia gama de emprendimientos, desde los más innovadores hasta los más consolidados, todo en un solo lugar. Nuestro lema es claro: &quot;Calidad en un solo lugar&quot;, un espacio donde la variedad, la accesibilidad y la calidad convergen para ofrecer lo mejor de cada emprendimiento.
         </p>
 
         <ul className="flex flex-col md:text-lg list-disc">

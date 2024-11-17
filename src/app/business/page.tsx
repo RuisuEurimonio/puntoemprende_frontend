@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useEffect, useState } from "react";
-import { getAll, getBusiness } from "../data/api";
+import { getBusiness } from "../data/api";
 import Spinner from "../components/Spinner";
 import { UserProps } from "../data/types";
 import NotAvaiable from "../components/NotAvailable";

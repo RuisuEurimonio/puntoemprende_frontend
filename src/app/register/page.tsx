@@ -6,7 +6,7 @@ import { z } from 'zod';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { getAll, registerUser } from '../data/api'; // Asume que tienes una función registerUser para registrar al usuario
 import { useRouter } from 'next/navigation';
-import { UserProps } from '../data/types';
+import { TownProps, TypeDocumentProps, UserProps } from '../data/types';
 import { fireToast } from '../utils/alerts';
 
 // Define el esquema de validación con Zod
@@ -35,15 +35,14 @@ const RegisterForm: React.FC = () => {
     register,
     handleSubmit,
     formState: { errors },
-    setValue,
 } = useForm<RegisterFormData>({
     resolver: zodResolver(registerSchema),
 });
 
   const router = useRouter();
 
-  const [towns, setTowns] = useState<any[]>([]); // Para almacenar las localidades
-  const [typesDocument, setTypesDocument] = useState<any[]>([]); // Para almacenar los tipos de documento
+  const [towns, setTowns] = useState<TownProps[]>([]); // Para almacenar las localidades
+  const [typesDocument, setTypesDocument] = useState<TypeDocumentProps[]>([]); // Para almacenar los tipos de documento
 
   // Cargar localidades y tipos de documento desde la API
   useEffect(() => {

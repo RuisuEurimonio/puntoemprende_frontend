@@ -5,7 +5,7 @@ import { useForm } from "react-hook-form";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { CategoryProps, ScopeProps, UserProps, PostProps } from "../data/types";
-import { createApi, updateApi, getAll, getById } from "../data/api";
+import { createApi, updateApi, getAll} from "../data/api";
 
 type PostModalProps = {
   isOpen: boolean;

@@ -5,11 +5,7 @@ import { UserProps } from '../data/types';
 import { getAll } from '../data/api';
 import UserFormModal from './UserFormModal';
 
-type TableUserProps = {
-  
-}
-
-const TableUser: React.FC<TableUserProps> = () => {
+const TableUser: React.FC<{}> = () => {
 
     const [users, setUser] = useState<UserProps[] | null>(null);
     const [modalOpenClose, setModalOpenClose] = useState<boolean>(false);
@@ -17,14 +13,6 @@ const TableUser: React.FC<TableUserProps> = () => {
 
   const handleModal = () => {
     setModalOpenClose(!modalOpenClose);
-  }
-
-  const handleEdit = () => {
-
-  }
-
-  const handleDelete = () => {
-    
   }
 
     useEffect(()=>{
@@ -69,7 +57,6 @@ const TableUser: React.FC<TableUserProps> = () => {
             </td>
             <td className="py-2 px-6 border-b text-center">
               <button
-                onClick={() => handleDelete()}
                 className="text-red-500 hover:text-red-700"
               >
                 Eliminar

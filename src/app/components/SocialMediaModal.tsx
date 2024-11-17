@@ -1,9 +1,9 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect } from 'react';
 import { useForm } from 'react-hook-form';
 import { z } from 'zod';
 import { zodResolver } from '@hookform/resolvers/zod';
-import { SocialMediaProps, TypeValueProps } from '../data/types';
-import { createApi, updateApi } from '../data/api';
+import { SocialMediaProps } from '../data/types';
+import { updateApi } from '../data/api';
 
 // Definir el esquema Zod para la validación
 const socialSchema = z.object({

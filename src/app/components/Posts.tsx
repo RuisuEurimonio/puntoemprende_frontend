@@ -6,7 +6,6 @@ import { getAll } from '../data/api';
 import NotAvaiable from './NotAvailable';
 import Filters from './Filters';
 import Spinner from './Spinner';
-import PostModal from './PostModal';
 import ViewPost from './viewPost';
 
 const Post = () => {

@@ -1,12 +1,11 @@
 
 "use client"
-import { usePathname, useRouter } from "next/navigation";
-import Header from "./Header"; // Importamos el Header original
+import { usePathname } from "next/navigation";
+import Header from "./Header";
 
-type HeaderWrapperProps = {
-};
 
-const HeaderWrapper: React.FC<HeaderWrapperProps> = () => {
+
+const HeaderWrapper: React.FC<{}> = () => {
     const path = usePathname();
     console.log(path);
 

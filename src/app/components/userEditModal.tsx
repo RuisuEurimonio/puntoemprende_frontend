@@ -30,7 +30,6 @@ const UserEditModal: React.FC<UserEditModalProps> = ({
     register,
     setValue,
     formState: { errors },
-    handleSubmit,
   } = useForm<FormData>({
     resolver: zodResolver(schema),
   });
@@ -49,13 +48,9 @@ const UserEditModal: React.FC<UserEditModalProps> = ({
         setValue("address", data.address || "");
         setValue("document", data.document);
       });
+      console.log(user);
     }
   }, [setValue]);
-
-  const onSubmit = (data: FormData) => {
-    //closeModal(); 
-  };
-
   if (!isModalOpen) return null;
 
   return (
@@ -68,7 +63,7 @@ const UserEditModal: React.FC<UserEditModalProps> = ({
           ✕
         </button>
         <h3 className="text-lg font-bold mb-4 text-main">Editar Información</h3>
-        <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
+        <form className="space-y-6">
           <div>
             <label htmlFor="name" className="block text-sm text-main font-semibold">
               Nombre

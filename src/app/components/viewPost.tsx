@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { PostProps } from "../data/types";
+import { PostProps, SocialMediaProps } from "../data/types";
 import { getById } from "../data/api";
 
 type ModalProps = {
@@ -15,10 +15,11 @@ const ViewPost: React.FC<ModalProps> = ({ isOpen, onClose, idPost }) => {
     const toggleSocialMenu = () => setIsSocialMenuOpen(!isSocialMenuOpen);
 
     useEffect(() => {
-        idPost &&
+        if(idPost){
             getById("post", idPost).then((data) => {
                 setData(data);
             });
+        }
     }, []);
 
     return (
@@ -119,7 +120,7 @@ const ViewPost: React.FC<ModalProps> = ({ isOpen, onClose, idPost }) => {
                                 <div className="absolute top-full mt-2 bg-white border border-gray-300 rounded shadow-lg">
                                     {data && data.user.socialMedia && data?.user?.socialMedia?.length > 0 ? (
                                         <ul className="py-2 w-full">
-                                            {data.user.socialMedia.map((social: any) => (
+                                            {data.user.socialMedia.map((social: SocialMediaProps) => (
                                                 <li
                                                     key={social.id}
                                                     className="px-4 py-2 hover:bg-gray-100 flex items-center gap-2"

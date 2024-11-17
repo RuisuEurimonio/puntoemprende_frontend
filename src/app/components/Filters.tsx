@@ -1,7 +1,7 @@
 "use client"
 
 import React, { useEffect, useState } from 'react';
-import { CategoryProps, PostProps, ScopeProps, TownProps, UserProps } from '../data/types';
+import { CategoryProps, PostProps, ScopeProps, UserProps } from '../data/types';
 import { findByEntity, getAll, searchEntity } from '../data/api';
 import { fireToast } from '../utils/alerts';
 import PostModal from './PostModal';
@@ -11,8 +11,6 @@ type FiltersProps = {
   onUpdate: () => void;
 }
 
-
-
 const Filters : React.FC<FiltersProps> = ( {updateData, onUpdate} ) => {
   const [selectedScope, setSelectedScope] = useState<string>('');
   const [selectedCategory, setSelectedCategory] = useState<string>('');
@@ -20,8 +18,8 @@ const Filters : React.FC<FiltersProps> = ( {updateData, onUpdate} ) => {
 
   const [scope, setScope] = useState<ScopeProps[] | null>(null);
   const [categories, setCategories] = useState<CategoryProps[] | null>(null);
-  const [isLoading, setIsLoading] = useState<Boolean>(true);
-  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isLoading, setIsLoading] = useState<boolean>(true);
+  const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
 
   const handleScopeChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
     const id = event.target.value;
@@ -81,7 +79,6 @@ const Filters : React.FC<FiltersProps> = ( {updateData, onUpdate} ) => {
       <div className="flex flex-col justify-between items-center mb-5
                     lg:flex-row
       ">
-        {/* Botón para agregar publicación */}
         <button className="bg-main text-white px-4 text-lg hover:bg-secondary transition h-7 w-96 mb-5
                             lg:w-auto lg:mb-0"
                 onClick={validateCreation}
@@ -89,11 +86,9 @@ const Filters : React.FC<FiltersProps> = ( {updateData, onUpdate} ) => {
           Agregar Publicación
         </button>
 
-        {/* Filtros en la parte derecha */}
         <div className="flex items-center flex-col
                         lg:flex-row
                         ">
-          {/* Filtro por ciudad */}
           <div className="flex flex-col">
             <select
               id="scope"
@@ -112,7 +107,6 @@ const Filters : React.FC<FiltersProps> = ( {updateData, onUpdate} ) => {
             </select>
           </div>
 
-          {/* Filtro por categoría */}
           <div className="flex flex-col">
             <select
               id="category"

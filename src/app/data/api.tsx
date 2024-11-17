@@ -1,5 +1,4 @@
-import Swal from "sweetalert2";
-import { PostProps, TypeValueProps, UserProps } from "./types";
+import {TypeValueProps, UserProps } from "./types";
 import { fireToast } from "../utils/alerts";
 
 const HOST = "http://localhost:8080/api/"
@@ -13,6 +12,7 @@ export async function getAll(typeValue : TypeValueProps){
         return null;
     } catch(e){
         fireToast("error", "Ha sucedido un error, vuelvelo a intentar.\n");
+        console.log(e);
     }
 }
 
@@ -26,6 +26,7 @@ export async function findByEntity(typeValue: TypeValueProps, findBy : TypeValue
         return null;
     } catch(e){
         fireToast("error", "Ha sucedido un error, vuelvelo a intentar.\n");
+        console.log(e);
     }
 }
 
@@ -39,6 +40,7 @@ export async function searchEntity(typeValue: TypeValueProps, input : string){
         return null;
     } catch(e){
         fireToast("error", "Ha sucedido un error, vuelvelo a intentar.\n");
+        console.log(e);
     }
 }
 
@@ -63,6 +65,7 @@ export async function login(email : String, password : String){
         return null;
     } catch(e){
         fireToast("error", "Ha sucedido un error, vuelvelo a intentar.\n");
+        console.log(e);
     }
 }
 
@@ -119,6 +122,7 @@ export async function getById(type : TypeValueProps, id : number){
         return null;
     } catch(e){
         fireToast("error", "Ha sucedido un error, vuelvelo a intentar.\n");
+        console.log(e);
     }
 }
 
@@ -168,5 +172,6 @@ export async function getBusiness(){
         return null;
     } catch(e){
         fireToast("error", "Ha sucedido un error, vuelvelo a intentar.\n");
+        console.log(e);
     }
 }
