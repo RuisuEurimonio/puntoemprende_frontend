@@ -5,7 +5,7 @@ import Header from "./Header";
 
 
 
-const HeaderWrapper: React.FC<{}> = () => {
+const HeaderWrapper = () => {
     const path = usePathname();
     console.log(path);
 

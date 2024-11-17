@@ -5,7 +5,7 @@ import { UserProps } from '../data/types';
 import { getAll } from '../data/api';
 import UserFormModal from './UserFormModal';
 
-const TableUser: React.FC<{}> = () => {
+const TableUser = () => {
 
     const [users, setUser] = useState<UserProps[] | null>(null);
     const [modalOpenClose, setModalOpenClose] = useState<boolean>(false);

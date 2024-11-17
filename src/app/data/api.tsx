@@ -44,7 +44,7 @@ export async function searchEntity(typeValue: TypeValueProps, input : string){
     }
 }
 
-export async function login(email : String, password : String){
+export async function login(email : string, password : string){
     try{
         const res = await fetch(HOST+ "user/login", {
             method: "POST",
