@@ -32,8 +32,7 @@ const SettingsPage: React.FC = () => {
 
   useEffect(()=>{
     const user = getUserFromLocal();
-    console.log(user)
-    if(user.permission?.id != 2){
+    if(user && user.permission?.id != 2){
         router.push("/");
     }
   },[])
