@@ -89,6 +89,13 @@ export type PermissionProps = {
     name: string;
 }
 
+export type SystemProps = {
+    name: string;
+    description: string;
+    id: number;
+    note: string;
+}
+
 export type SwalIconType = 'success' | 'error' | 'warning' | 'info' | 'question';
 
-export type TypeValueProps = 'post' | 'category' | 'town' | 'scope' | 'typedocument' | 'user' | 'social-media';
+export type TypeValueProps = 'post' | 'category' | 'town' | 'scope' | 'typedocument' | 'user' | 'social-media' | 'system';
