@@ -7,7 +7,6 @@ import Header from "./Header";
 
 const HeaderWrapper = () => {
     const path = usePathname();
-    console.log(path);
 
   return (
     <>

@@ -59,7 +59,6 @@ const RegisterForm: React.FC = () => {
   }, []);
 
   const onSubmit = (data: RegisterFormData) => {
-    console.log("hola")
     const user : UserProps = {
         "name": data.name,
         "lastName": data.lastName,
