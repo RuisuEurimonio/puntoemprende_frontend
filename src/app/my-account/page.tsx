@@ -81,6 +81,7 @@ const MyAccountPage: React.FC = () => {
                 </h1>
                 <p className="text-gray-600">{user.email}</p>
               </div>
+              {user.permission && user.permission.id === 2 && <Link href="/config" className="bg-green-500 text-white px-4 py-2 rounded-md hover:bg-green-600"> Configuración. </Link>}
             </div>
 
             <div className="mt-6 space-y-4 text-black">
@@ -176,6 +177,8 @@ const MyAccountPage: React.FC = () => {
 
       {/* Modal */}
       <UserEditModal key={""+updateData+"-userModal"} isModalOpen={modalVisible} closeModal={handleModalVisible} />
+
+
     </div>
   );
 };

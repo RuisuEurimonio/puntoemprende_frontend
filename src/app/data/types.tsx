@@ -98,4 +98,4 @@ export type SystemProps = {
 
 export type SwalIconType = 'success' | 'error' | 'warning' | 'info' | 'question';
 
-export type TypeValueProps = 'post' | 'category' | 'town' | 'scope' | 'typedocument' | 'user' | 'social-media' | 'system';
+export type TypeValueProps = 'post' | 'category' | 'town' | 'scope' | 'typedocument' | 'user' | 'social-media' | 'system' | 'motive';
