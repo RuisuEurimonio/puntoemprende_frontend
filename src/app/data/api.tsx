@@ -60,12 +60,11 @@ export async function login(email : string, password : string){
             const resJson = await res.json();
             return resJson;
         }else if(res.status === 403){
-            fireToast("error", "Credenciales invalidas.")
+            fireToast("error", "Correo o contraseña invalidos.")
         }
-        return null;
+        return;
     } catch(e){
-        fireToast("error", "Ha sucedido un error, vuelvelo a intentar.\n");
-        console.log(e);
+        fireToast("error", e+"");
     }
 }
 

@@ -29,12 +29,10 @@ const MyAccountPage: React.FC = () => {
         setIsLoading(false);
       })
     }
-    console.log("me voy a poner en false")
     setUpdateData(false);
   }, [updateData]);
 
   const handleUpdateData = () => {
-    console.log("me voy a poner en true")
     setUpdateData(true);
   }
 

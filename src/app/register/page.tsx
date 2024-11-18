@@ -21,8 +21,12 @@ const registerSchema = z.object({
   address: z.string().min(1, { message: 'La dirección es requerida' }),
   document: z.string().min(1, { message: 'El número de documento es requerido' }),
   password: z
-    .string()
-    .min(6, { message: 'La contraseña debe tener al menos 6 caracteres' }),
+  .string()
+  .min(8, { message: 'La contraseña debe tener al menos 8 caracteres' })
+  .regex(/[A-Z]/, { message: 'La contraseña debe tener al menos una letra mayúscula' })
+  .regex(/[a-z]/, { message: 'La contraseña debe tener al menos una letra minúscula' })
+  .regex(/\d/, { message: 'La contraseña debe tener al menos un número' })
+  .regex(/[^A-Za-z0-9]/, { message: 'La contraseña debe tener al menos un carácter especial' }),
   townId: z.number().min(1, { message: 'La localidad es requerida' }),
   typeDocumentId: z.number().min(1, { message: 'El tipo de documento es requerido' })
 });
