@@ -42,6 +42,7 @@ const UserEditModal: React.FC<UserEditModalProps> = ({
     if (userJson && userJson.id) {
       getById("user", userJson.id).then((data) => {
         setUser(data);
+        consolé.log(user);
         setValue("name", data.name);
         setValue("lastName", data.lastName);
         setValue("business", data.business || "");
