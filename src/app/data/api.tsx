@@ -1,7 +1,7 @@
 import {TypeValueProps, UserProps } from "./types";
 import { fireToast } from "../utils/alerts";
 
-const HOST = "http://localhost:8080/api/"
+const HOST = "http://localhost:8081/api/"
 export async function getAll(typeValue : TypeValueProps){
     try{
         const res = await fetch(HOST+ typeValue +"/all")
