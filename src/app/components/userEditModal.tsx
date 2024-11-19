@@ -34,15 +34,12 @@ const UserEditModal: React.FC<UserEditModalProps> = ({
     resolver: zodResolver(schema),
   });
 
-  const [user, setUser] = useState<UserProps | null>(null);
-
   useEffect(() => {
     const userStorage = localStorage.getItem("U");
     const userJson: UserProps = userStorage ? JSON.parse(userStorage) : null;
     if (userJson && userJson.id) {
       getById("user", userJson.id).then((data) => {
         setUser(data);
-        consolé.log(user);
         setValue("name", data.name);
         setValue("lastName", data.lastName);
         setValue("business", data.business || "");
