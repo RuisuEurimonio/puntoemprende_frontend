@@ -92,18 +92,29 @@ export async function registerUser<T extends UserProps>(data : T){
     }
 }
 
-export async function createApi<T>(type : TypeValueProps, data : T){
+export async function createApi<T>(type : TypeValueProps, data : T, token? : string){
+    let headersContent = {};
+    if (token != null) {
+        headersContent = {
+            "Content-Type": "application/json",
+            "Authorization": `Bearer ${token}`
+        }
+    }else{
+        headersContent = {
+            "Content-Type": "application/json"
+        }
+    }
     try{
         const res = await fetch(HOST+ type+"/create",{
             method: "POST",
             body: JSON.stringify(data),
-            headers: {
-                "Content-Type": "application/json"
-            }
+            headers: headersContent
         });
         if(res.status === 201){
             const resJson = await res.json();
             return resJson;
+        } else if (res.status === 403){
+            throw new Error("Verifica tus permisos.")
         }
         throw new Error(await res.text());
     } catch(e ){
@@ -125,18 +136,29 @@ export async function getById(type : TypeValueProps, id : number){
     }
 }
 
-export async function updateApi<T>(type : TypeValueProps, data : T){
+export async function updateApi<T>(type : TypeValueProps, data : T, token?: string){
+    let headersContent = {};
+    if (token != null) {
+        headersContent = {
+            "Content-Type": "application/json",
+            "Authorization": `Bearer ${token}`
+        }
+    }else{
+        headersContent = {
+            "Content-Type": "application/json"
+        }
+    }
     try{
         const res = await fetch(HOST+ type+"/update",{
             method: "PUT",
             body: JSON.stringify(data),
-            headers: {
-                "Content-Type": "application/json"
-            }
+            headers: headersContent
         });
         if(res.status === 201){
             const resJson = await res.json();
             return resJson;
+        }else if (res.status === 403){
+            throw new Error("Verifica tus permisos.")
         }
         throw new Error(await res.text());
     } catch(e ){
@@ -144,16 +166,27 @@ export async function updateApi<T>(type : TypeValueProps, data : T){
     }
 }
 
-export async function deleteApi(type : TypeValueProps, idEntity : number){
+export async function deleteApi(type : TypeValueProps, idEntity : number, token ?: string){
+    let headersContent = {};
+    if (token != null) {
+        headersContent = {
+            "Content-Type": "application/json",
+            "Authorization": `Bearer ${token}`
+        }
+    }else{
+        headersContent = {
+            "Content-Type": "application/json"
+        }
+    }
     try{
         const res = await fetch(HOST+ type+"/delete/"+idEntity,{
             method: "DELETE",
-            headers: {
-                "Content-Type": "application/json"
-            }
+            headers: headersContent
         });
         if(res.status === 204){
             return true;
+        }else if (res.status === 403){
+            throw new Error("Verifica tus permisos.")
         }
         throw new Error(await res.text());
     } catch(e ){

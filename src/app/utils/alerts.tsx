@@ -50,7 +50,7 @@ export function handleAccountDeletion(type : TypeValueProps, idNumber : number){
   });
 };
 
-export function handleEntitytDeletion(type : TypeValueProps, idNumber : number, onUpdate : ()=>void, entity? : string, text? : string){
+export function handleEntitytDeletion(type : TypeValueProps, idNumber : number, onUpdate : ()=>void, entity? : string, text? : string, token? : string){
   Swal.fire({
       title: "¿Estás seguro?",
       text: text ?? "Esta acción es irreversible.",
@@ -62,7 +62,7 @@ export function handleEntitytDeletion(type : TypeValueProps, idNumber : number, 
       cancelButtonText: "Cancelar",
   }).then((result) => {
       if (result.isConfirmed) {
-          deleteApi(type, idNumber).then((response) => {
+          deleteApi(type, idNumber, token ? token : undefined).then((response) => {
             if(response){
             Swal.fire(
               "¡Eliminad@!",

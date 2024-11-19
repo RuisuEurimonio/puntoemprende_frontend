@@ -14,11 +14,17 @@ const PublicationPerUser : React.FC<userPostsProps> = ({idUser}) => {
     const [selectedPost, setSelectedPost] = useState<PostProps | undefined>(undefined);
     const [modalOpen, setModalOpen] = useState(false);
     const [updateData, setUpdateData] = useState(true);
+    const [token, setToken] = useState<string | null>(null);
 
     useEffect(() => {
         findByEntity("post", "user", idUser).then((data)=>{
             setPosts(data);
         })
+        const tokenStorage = localStorage.getItem("T");
+        const token: string = tokenStorage ? tokenStorage : "";
+        if(token != ""){
+            setToken(token);
+        }
         setUpdateData(false);
     }, [updateData]);
 
@@ -27,7 +33,7 @@ const PublicationPerUser : React.FC<userPostsProps> = ({idUser}) => {
     }
 
     const handleDelete = (id: number) => {
-        handleEntitytDeletion("post", id, handleUpdateData, "publicación", "Eliminar publicación seleccionada.")
+        handleEntitytDeletion("post", id, handleUpdateData, "publicación", "Eliminar publicación seleccionada.", token ? token : undefined)
     };
 
     const handleOpenCloseModal = () => {

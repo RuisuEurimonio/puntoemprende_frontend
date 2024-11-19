@@ -48,7 +48,6 @@ const UserEditModal: React.FC<UserEditModalProps> = ({
         setValue("address", data.address || "");
         setValue("document", data.document);
       });
-      console.log(user);
     }
   }, [setValue]);
   if (!isModalOpen) return null;

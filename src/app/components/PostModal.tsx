@@ -40,6 +40,7 @@ const PostModal: React.FC<PostModalProps> = ({ isOpen, onClose, onUpdate, post }
   const [scopes, setScopes] = useState<ScopeProps[] | null>(null);
   const [categories, setCategories] = useState<ScopeProps[] | null>(null);
   const [userId, setUserId] = useState<number | null>(null);
+  const [token, setToken] = useState<string | null>(null);
   const [isEditing, setIsEditing] = useState<boolean>(false); // Estado para determinar si estamos editando o creando
 
   const onSubmit = (data: PublicationFormData) => {
@@ -66,11 +67,11 @@ const PostModal: React.FC<PostModalProps> = ({ isOpen, onClose, onUpdate, post }
         "id": post.id,
         ...publicationData
       }
-      updateApi("post", postUpdate).then(()=>{
+      updateApi("post", postUpdate, token ? token : undefined).then(()=>{
         onUpdate();
       })
     } else {
-      createApi("post", publicationData).then(()=>{
+      createApi("post", publicationData, token ? token : undefined).then(()=>{
         onUpdate();
       })
     }
@@ -79,9 +80,12 @@ const PostModal: React.FC<PostModalProps> = ({ isOpen, onClose, onUpdate, post }
 
   const getUserData = () => {
     const userStorage = localStorage.getItem("U");
+    const tokenStorage = localStorage.getItem("T");
     const user: UserProps = userStorage ? JSON.parse(userStorage) : null;
-    if (user && user.id) {
+    const token: string = tokenStorage ? tokenStorage : "";
+    if (user && user.id && token != "") {
       setUserId(user.id);
+      setToken(token);
     }
   };
 
